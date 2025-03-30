@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Header with Navigation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <header class="w-full border-b bg-white">
+    <div class="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
+      <!-- Logo/Brand -->
+      <a href="/user/shop" class="flex items-center gap-2">
+        <span class="text-xl font-bold">Scatch</span>
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex gap-6">
+        <!-- Cart Link -->
+        <a href="/user/cart" class="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-blue-600">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+            <circle cx="8" cy="21" r="1"></circle>
+            <circle cx="19" cy="21" r="1"></circle>
+            <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+          </svg>
+          Cart
+        </a>
+        
+        <!-- Order Link -->
+        <a href="/user/orders" class="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-blue-600">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+            <path d="M4 10V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"></path>
+            <path d="M4 10h16"></path>
+          </svg>
+          Orders
+        </a>
+        
+        <!-- Profile Link -->
+        <a href="/user/profile" class="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-blue-600">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          Profile
+        </a>
+        
+        <!-- Logout Link -->
+        <a href="/user/logout" class="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-blue-600">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          Logout
+        </a>
+      </nav>
+  </header>
+</body>
+</html>

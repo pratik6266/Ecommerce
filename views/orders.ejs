@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart Page</title>
+  <script src="https://cdn.tailwindcss.com"></script> 
+</head>
+<body>
+  
+  <!-- Include Header -->
+  <%- include('./partials/header') %>
+
+  <% if(success.length>0){ %>
+    <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-blue-500">
+        <span class="inline-block mt-1 mb-1 text-white">
+            <%= success %>
+        </span>
+    </div>
+  <% } %>
+
+  <!-- Cart Items Section -->
+  <div class="w-full min-h-screen flex flex-col px-20 py-10 gap-10">
+    
+    <% if (user.orders.length > 0) { %>
+      
+      <% user.orders.reverse().forEach((item) => { %>
+
+        <% 
+          let parts = item.orderDate.split('/'); 
+          let date = new Date(parts[2], parts[1] - 1, parts[0]); // Parse (DD/MM/YYYY)
+          date.setDate(date.getDate() + 7); // Add 7 days
+      
+          let today = new Date();
+          today.setHours(0, 0, 0, 0); // Remove time for accurate comparison
+      
+          if (date <= today) return; // Skip iteration if orderDate + 7 is not in the future
+        %>
+      
+        <div class="w-full flex items-start gap-10">
+          <!-- Product Image & Info -->
+          <div class="w-[30%] rounded-md overflow-hidden shadow-lg border">
+            <div class="w-full h-52 flex items-center justify-center bg-[<%= item.bgcolor %>]">
+              <img class="h-[12rem]" src="data:image/jpeg;base64,<%= item.image.toString('base64') %>" alt="">
+            </div>  
+            <div class="w-full flex justify-between px-5 py-4 bg-[<%= item.panelcolor %>] text-[<%= item.textcolor %>]">
+              <h3 class="text-2xl font-semibold"><%= item.name %></h3>
+            </div>
+            <div class="flex items-center justify-between px-5 py-3 border-t bg-[<%= item.panelcolor %>] text-[<%= item.textcolor %>]">
+              <h4 class="text-lg font-medium">Net Total</h4>
+              <h2 class="text-lg font-bold text-green-600">₹ <%= (((item.price - item.discount) * item.quantity) + 20) %></h2>
+            </div>
+          </div>
+      
+          <!-- Price Breakdown -->
+          <div class="w-[70%]">
+            <h3 class="text-xl font-bold">Price Breakdown</h3>
+            <div class="px-10 mt-5 space-y-2">
+              <div class="flex justify-between">
+                <h4 class="font-medium">Total MRP</h4>
+                <h4>₹ <%= item.price %></h4>
+              </div>
+              <div class="flex justify-between">
+                <h4 class="font-medium">Discount on MRP</h4>
+                <h4 class="text-red-500">₹ <%= item.discount || 0 %></h4>
+              </div>
+              <div class="flex justify-between">
+                <h4 class="font-medium">Platform Fee</h4>
+                <h4>₹ 20</h4>
+              </div>
+              <div class="flex justify-between">
+                <h4 class="font-medium">Shipping Fee</h4>
+                <h4 class="text-green-600">FREE</h4>
+              </div>
+              <div class="flex justify-between">
+                <h4 class="font-medium">Expected Delivery</h4>
+                <h4 class="text-blue-600"><%= date.toLocaleDateString() %></h4>                                                       
+              </div>
+            </div>
+      
+            <!-- Total Amount -->
+            <div class="w-full h-[1px] bg-black mt-10"></div>
+            <div class="flex mt-5 justify-between">
+              <h3 class="text-xl font-bold">Total Amount</h3>
+              <h3 class="font-semibold text-xl text-green-600">₹ <%= (((item.price - item.discount) * item.quantity) + 20) %></h3>
+            </div>
+      
+            <!-- Checkout Button -->
+            <div class="flex space-x-4">
+              <!-- Remove from Cart Button -->
+              <a type="submit" href="/user/cancel/<%= item._id %>"
+                class="mt-2 px-5 py-2 bg-red-600 text-white rounded-md text-md font-medium transition-all duration-300 transform hover:bg-red-700 hover:scale-105 active:scale-95">
+                Cancel Order
+              </a>
+            </div>
+          </div>
+      
+        </div>
+      
+      <% }) %>
+      
+
+    <% } else { %>
+      <!-- Empty Cart Message -->
+      <div class="text-center w-full py-20">
+        <h2 class="text-2xl font-bold text-gray-600">No Orders</h2>
+        <a href="/user/shop" class="mt-5 inline-block bg-blue-500 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700">
+          Continue Shopping
+        </a>
+      </div>
+    <% } %>
+
+  </div>
+
+</body>
+</html>
