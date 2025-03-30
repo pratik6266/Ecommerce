@@ -234,5 +234,11 @@ router.get('/discount', isLoggedIn, async (req, res) => {
   }
 });
 
+router.get('/new', isLoggedIn, async (req, res) => {
+  let products = await productModel.find();
+  let success = req.flash('success') || '';
+  res.render('newItem', {products, success});
+})
+
 
 module.exports = router;

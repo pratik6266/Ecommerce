@@ -15,10 +15,10 @@
             <div class="flex items-center gap-2">
                 <h3>Sort by</h3>
                 <form action="">
-                    <select class="border-[1px] px-2 py-1" name="sortby" id="">
-                        <option value="popular">Popular</option>
-                        <option value="newest">Newest</option>
-                    </select>
+                    <div class="flex flex-col border-[1px] px-2 py-1" name="sortby" id="">
+                        <a href="/user/shop" class="pt-1" value="popular">Popular</a>
+                        <a href="/user/new" class="pt-1" value="newest">Newest</a>
+                    </div>
                 </form>
             </div>
             <div class="flex flex-col mt-20">
@@ -26,9 +26,9 @@
                 <a class="block w-fit mb-2" href="/user/discount">Discounted Products</a>
             </div>
             <div class="mt-32">
-                <a class="block w-fit mb-2" href="">Filter by :</a>
-                <a class="block w-fit mb-2" href="">Availability</a>
-                <a class="block w-fit mb-2" href="">Discount</a>
+                <div class="block w-fit mb-2">Filter by :</div>
+                <a class="block w-fit mb-2" href="/user/shop">Availability</a>
+                <a class="block w-fit mb-2" href="/user/discount">Discount</a>
             </div>
         </div>
         <div class="w-full flex flex-col gap-5 h-screen">
