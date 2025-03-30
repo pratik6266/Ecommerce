@@ -9,13 +9,6 @@
 </head>
 <body>
     <%- include('./partials/header') %>
-    <% if(success.length>0){ %>
-        <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-blue-500">
-            <span class="inline-block mt-1 mb-1 text-white">
-                <%= success %>
-            </span>
-        </div>
-        <% } %>
     </div>
     <div class="w-full h-screen flex items-start px-20 py-20">
         <div class="w-[25%] flex h-screen flex-col items-start">
@@ -29,7 +22,7 @@
                 </form>
             </div>
             <div class="flex flex-col mt-20">
-                <a class="block w-fit mb-2" href="">All Products</a>
+                <a class="block w-fit mb-2" href="/user/shop">All Products</a>
                 <a class="block w-fit mb-2" href="/user/discount">Discounted Products</a>
             </div>
             <div class="mt-32">
@@ -40,7 +33,7 @@
         </div>
         <div class="w-full flex flex-col gap-5 h-screen">
             <div class="flex items-start gap-5 flex-wrap">
-                <% products.forEach(function(product){ %>
+                <% items.forEach(function(product){ %>
                     <div class="w-60">
                         <div class="w-full h-52 flex items-center justify-center bg-[<%= product.bgcolor %>]">
                             <img class="h-[12rem]" src="data:image/jpeg;base64,<%= product.image.toString('base64') %>"

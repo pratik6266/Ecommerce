@@ -225,5 +225,14 @@ router.get('/sub/:id', isLoggedIn, async (req, res) => {
   return res.redirect('/user/cart');
 });
 
+router.get('/discount', isLoggedIn, async (req, res) => {
+  try {
+    let items = await productModel.find({ discount: { $gt: 0 } });
+    return res.render('discount', {items});
+  } catch (error) {
+    res.status(500).send({ error: 'Internal Server Error' });
+  }
+});
+
 
 module.exports = router;
