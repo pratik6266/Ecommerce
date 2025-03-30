@@ -46,8 +46,19 @@ router.get('/logout', isOwnerlogged, (req, res) => {
   res.status(200).redirect('/');
 })
 
-router.get('/homepage', isOwnerlogged, (req, res) => {
+router.get('/homepage', isOwnerlogged, async (req, res) => {
+  await req.user.populate('product');
   res.render('ownershop', {products: req.user.product || []});
+})
+
+router.get('/remove/:id', isOwnerlogged, async (req, res) => {
+  await req.user.populate('product');
+  let id = req.params.id;
+  let user = req.user;
+  let ans = user.product.findIndex(item => item.toString() === id);
+  user.product.splice(ans, 1);
+  await user.save();
+  return res.redirect('/owner/homepage');
 })
 
 module.exports = router;
