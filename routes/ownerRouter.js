@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 const ownerModel = require('../model/owner.model');
 const bcrypt = require('bcrypt');
-const isOwnerlogged = require('../middlewares/isOwnerlogged')
+const isOwnerlogged = require('../middlewares/isOwnerlogged');
+const porductModel = require('../model/product.model');
+const productModel = require('../model/product.model');
 
 router.post('/create', async (req, res) => {
   let {fullname, email, password, gstin} = req.body;
@@ -58,6 +60,7 @@ router.get('/remove/:id', isOwnerlogged, async (req, res) => {
   let ans = user.product.findIndex(item => item.toString() === id);
   user.product.splice(ans, 1);
   await user.save();
+  await productModel.deleteOne({_id: id});
   return res.redirect('/owner/homepage');
 })
 
